@@ -17,6 +17,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/function-component-definition': 'off',
     'arrow-body-style': 'off',
+    'no-param-reassign': 'off',
   },
   settings: {
     'import/resolver': {
