@@ -18,6 +18,10 @@ module.exports = {
     'react/function-component-definition': 'off',
     'arrow-body-style': 'off',
     'no-param-reassign': 'off',
+    'consistent-return': 'off',
+    'no-else-return': 'off',
+    'no-plusplus': 'off',
+    '@typescript-eslint/ban-ts-comment' : 'off',
   },
   settings: {
     'import/resolver': {
