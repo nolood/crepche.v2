@@ -1,5 +1,5 @@
 import { Box, Stack } from '@mui/material';
-import { AsideBar, Search, SortingPanel } from '../../components';
+import { AsideBar } from '../../components';
 
 const HomePage = () => {
   return (
@@ -10,12 +10,7 @@ const HomePage = () => {
       }}
     >
       <AsideBar />
-      <Stack sx={{ width: '100%' }}>
-        <Stack direction="row">
-          <Search />
-          <SortingPanel />
-        </Stack>
-      </Stack>
+      <Stack sx={{ width: '100%' }} />
     </Box>
   );
 };

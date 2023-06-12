@@ -1,17 +1,21 @@
 import { Box, Button } from '@mui/material';
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AsideBarItem } from '../index';
 import { useAppDispatch, useAppSelector } from '../../hooks/useReduxHooks';
 import { selectCategories } from '../../store/slices/devSlice/devSelectors';
 import { fetchCategories } from '../../store/slices/devSlice/devAsync';
 import AsideBarSkeleton from './AsideBarSkeleton';
 import { setActiveCategory } from '../../store/slices/userSlice';
+import { CATALOG_ROUTE } from '../../utils/consts';
 
 const AsideBar = () => {
   const categories = useAppSelector(selectCategories);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const handleSetActiveCategory = (title: string, id: string) => {
     dispatch(setActiveCategory({ title, id }));
+    navigate(CATALOG_ROUTE);
   };
   useEffect(() => {
     dispatch(fetchCategories());

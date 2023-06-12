@@ -9,6 +9,7 @@ const initialState: UserState = {
   openMessage: false,
   activeCategory: null,
   activeSubCategory: null,
+  search: null,
   message: {
     title: null,
     type: undefined,
@@ -44,6 +45,9 @@ const userSlice = createSlice({
     setActiveSubCategory(state, action: PayloadAction<{ title: string, id: string }>) {
       state.activeSubCategory = action.payload;
     },
+    setSearch(state, action: PayloadAction<string>) {
+      state.search = action.payload;
+    },
   },
   extraReducers,
 });
@@ -56,6 +60,7 @@ export const {
   setSorting,
   setActiveCategory,
   setActiveSubCategory,
+  setSearch,
 } = userSlice.actions;
 
 export default userSlice.reducer;

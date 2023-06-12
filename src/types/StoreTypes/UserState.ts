@@ -5,6 +5,7 @@ export type UserState = {
   message: MessageType,
   openMessage: boolean,
   isAuth: boolean,
+  search: string | null,
   activeCategory: { title: string, id: string } | null,
   activeSubCategory: { title: string, id: string } | null,
   sorting: {

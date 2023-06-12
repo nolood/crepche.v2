@@ -1,9 +1,10 @@
 import {
-  Card, CardActions, CardContent, CardMedia, Typography, Button,
+  Card, CardActions, CardContent, CardMedia, Typography, Button, Tooltip,
 } from '@mui/material';
 import { FC, useEffect, useState } from 'react';
 import { ref, getDownloadURL, getStorage } from 'firebase/storage';
 import { CardItemProps } from '../../types/PropsTypes/CardItemProps';
+import CardImageSkeleton from './CardImageSkeleton.tsx';
 
 const CardItem: FC<CardItemProps> = ({
   id, title, pack, price, activeSubCategory,
@@ -28,16 +29,27 @@ const CardItem: FC<CardItemProps> = ({
         width: '350px',
       }}
     >
-      <CardMedia
-        component="img"
-        alt="cringe"
-        height="140"
-        image={String(image)}
-      />
+      {image
+        ? (
+          <CardMedia
+            component="img"
+            alt="cringe"
+            height="140"
+            image={String(image)}
+          />
+        )
+        : <CardImageSkeleton />}
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {title}
-        </Typography>
+        <Tooltip title={title}>
+          <Typography
+            gutterBottom
+            variant="h5"
+            component="div"
+            noWrap
+          >
+            {title}
+          </Typography>
+        </Tooltip>
         <Typography variant="body2" color="text.secondary">
           Цена:
           {' '}
