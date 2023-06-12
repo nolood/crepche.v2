@@ -1,4 +1,4 @@
-import { HOME_ROUTE } from './consts';
+import { CATALOG_ROUTE, HOME_ROUTE } from './consts';
 import { NavbarItemsType } from '../types/NavbarItemsType';
 
 const NavbarItems : NavbarItemsType[] = [
@@ -10,7 +10,7 @@ const NavbarItems : NavbarItemsType[] = [
   {
     id: 1,
     title: 'Catalog',
-    route: HOME_ROUTE,
+    route: CATALOG_ROUTE,
   },
   {
     id: 2,

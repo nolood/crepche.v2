@@ -39,7 +39,9 @@ const ChangeItems = () => {
     };
   };
   const handleAddFiles = () => {
-    dispatch(addFiles(itemsData));
+    if (itemsData.length > 5) {
+      dispatch(addFiles(itemsData));
+    }
   };
 
   const DevTableColumns = [
@@ -65,9 +67,8 @@ const ChangeItems = () => {
       headerName: 'SubCategory',
       width: 150,
       valueGetter: (params: GridValueGetterParams) => (
-        categories.filter((item) => (item.id === params.row.categoryId))[0]?.subcategories
-          ?.filter((subItem) => subItem.id === params.row.subCategoryId)[0]?.title
-      ),
+        categories.find((item) => item.id === params.row.categoryId)
+          ?.subcategories?.find((subItem) => subItem.id === params.row.subCategoryId)?.title),
     },
     { field: 'categoryId', headerName: 'Category Id', width: 100 },
     { field: 'subCategoryId', headerName: 'SubCategory Id', width: 100 },

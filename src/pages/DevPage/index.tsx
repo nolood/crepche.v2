@@ -5,7 +5,7 @@ import SubCategory from '../../components/DevPageComponents/SubCategory';
 import CategoriesOverview from '../../components/DevPageComponents/CategoriesOverview';
 import { fetchCategories } from '../../store/slices/devSlice/devAsync';
 import { useAppDispatch } from '../../hooks/useReduxHooks';
-import ChangeItems from '../../components/DevPageComponents/ChangeItems.tsx';
+import ChangeItems from '../../components/DevPageComponents/ChangeItems';
 
 const DevPage = () => {
   const dispatch = useAppDispatch();

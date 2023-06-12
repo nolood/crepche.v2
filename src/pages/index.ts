@@ -3,6 +3,7 @@ import CartPage from './CartPage/CartPage';
 import HomePage from './HomePage/HomePage';
 import NotfoundPage from './NotfoundPage/NotfoundPage';
 import DevPage from './DevPage';
+import CatalogPage from './CatalogPage';
 
 export {
   AuthPage,
@@ -10,4 +11,5 @@ export {
   HomePage,
   NotfoundPage,
   DevPage,
+  CatalogPage,
 };

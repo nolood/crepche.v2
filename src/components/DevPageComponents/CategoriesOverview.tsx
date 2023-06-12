@@ -30,7 +30,7 @@ const CategoriesOverview = () => {
           </Button>
           <ListItemText
             primary={category.title}
-            sx={{ flexGrow: 0, minWidth: 150 }}
+            sx={{ flexGrow: 0, minWidth: 250 }}
           />
           <Stack
             direction="row"

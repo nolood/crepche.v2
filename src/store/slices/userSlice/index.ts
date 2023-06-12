@@ -6,11 +6,17 @@ import { MessageType } from '../../../types/MessageType';
 const initialState: UserState = {
   id: null,
   isAuth: false,
+  openMessage: false,
+  activeCategory: null,
+  activeSubCategory: null,
   message: {
     title: null,
     type: undefined,
   },
-  openMessage: false,
+  sorting: {
+    title: 'цене',
+    sortBy: 'desc',
+  },
 };
 
 const userSlice = createSlice({
@@ -29,6 +35,15 @@ const userSlice = createSlice({
     setIsAuth(state, action: PayloadAction<boolean>) {
       state.isAuth = action.payload;
     },
+    setSorting(state, action: PayloadAction<{ title: string, sortBy: string }>) {
+      state.sorting = { ...action.payload };
+    },
+    setActiveCategory(state, action: PayloadAction<{ title: string, id: string }>) {
+      state.activeCategory = action.payload;
+    },
+    setActiveSubCategory(state, action: PayloadAction<{ title: string, id: string }>) {
+      state.activeSubCategory = action.payload;
+    },
   },
   extraReducers,
 });
@@ -38,6 +53,9 @@ export const {
   setOpenMessage,
   setMessage,
   setIsAuth,
+  setSorting,
+  setActiveCategory,
+  setActiveSubCategory,
 } = userSlice.actions;
 
 export default userSlice.reducer;

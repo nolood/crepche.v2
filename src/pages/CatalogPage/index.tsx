@@ -1,7 +1,9 @@
 import { Box, Stack } from '@mui/material';
-import { AsideBar, Search, SortingPanel } from '../../components';
+import {
+  AsideBar, ItemsList, Search, SortingPanel,
+} from '../../components';
 
-const HomePage = () => {
+const CatalogPage = () => {
   return (
     <Box
       sx={{
@@ -15,9 +17,10 @@ const HomePage = () => {
           <Search />
           <SortingPanel />
         </Stack>
+        <ItemsList />
       </Stack>
     </Box>
   );
 };
 
-export default HomePage;
+export default CatalogPage;
