@@ -4,7 +4,9 @@ import {
 import { DataGrid, GridRowSelectionModel, GridValueGetterParams } from '@mui/x-data-grid';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/useReduxHooks';
-import { addFiles, changeItemsCategory, fetchItems } from '../../store/slices/devSlice/devAsync';
+import {
+  addFiles, addPopItems, addPromoItems, changeItemsCategory, fetchItems,
+} from '../../store/slices/devSlice/devAsync';
 import { selectCategories, selectItems } from '../../store/slices/devSlice/devSelectors';
 import { ItemType } from '../../types/ItemType';
 
@@ -42,6 +44,14 @@ const ChangeItems = () => {
     if (itemsData.length > 5) {
       dispatch(addFiles(itemsData));
     }
+  };
+
+  const handleAddPromoItems = () => {
+    dispatch(addPromoItems(selection));
+  };
+
+  const handleAddPopItems = () => {
+    dispatch(addPopItems(selection));
   };
 
   const DevTableColumns = [
@@ -123,8 +133,23 @@ const ChangeItems = () => {
             variant="outlined"
             sx={{ height: '100%' }}
             onClick={handleAddFiles}
+            disabled={itemsData.length === 0}
           >
             Добавить выбранные товары
+          </Button>
+          <Button
+            variant="outlined"
+            sx={{ height: '100%', mr: 2, ml: 2 }}
+            onClick={handleAddPromoItems}
+          >
+            Добавить в товары по акции
+          </Button>
+          <Button
+            variant="outlined"
+            sx={{ height: '100%' }}
+            onClick={handleAddPopItems}
+          >
+            Добавить в популярные товары
           </Button>
         </Box>
       </Stack>

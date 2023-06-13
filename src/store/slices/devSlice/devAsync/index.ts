@@ -141,7 +141,81 @@ export const addFiles = createAsyncThunk('dev/changeItemsCategoryStatus', async 
   set(itemsRef, items);
 });
 
+export const fetchPromoItems = createAsyncThunk('dev/fetchPromoItemsStatus', async () => {
+  const db = await getDatabase();
+  const itemsRef = ref(db, 'promo');
+  return get(itemsRef)
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        return snapshot.val() as ItemType[];
+      } else {
+        return [];
+      }
+    });
+});
+
+export const fetchPopItems = createAsyncThunk('dev/fetchPopItemsStatus', async () => {
+  const db = await getDatabase();
+  const itemsRef = ref(db, 'pop');
+  return get(itemsRef)
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        return Object.values(snapshot.val()) as ItemType[];
+      } else {
+        return [];
+      }
+    });
+});
+
+export const addPromoItems = createAsyncThunk('dev/addPromoItemsStatus', async (param: GridRowSelectionModel) => {
+  const db = getDatabase();
+  const result: ItemType[] = [];
+  for (let i = 0; i < param.length; i++) {
+    const itemRef = ref(db, `items/${param[i]}`);
+    const snapshot = await get(itemRef);
+    if (snapshot.exists()) {
+      const item = snapshot.val() as ItemType;
+      result.push(item);
+    }
+  }
+  const promoRef = ref(db, 'promo');
+  set(promoRef, result);
+  return result as ItemType[];
+});
+
+export const addPopItems = createAsyncThunk('dev/addPopItemsStatus', async (param: GridRowSelectionModel) => {
+  const db = getDatabase();
+  const result: ItemType[] = [];
+  for (let i = 0; i < param.length; i++) {
+    const itemRef = ref(db, `items/${param[i]}`);
+    const snapshot = await get(itemRef);
+    if (snapshot.exists()) {
+      const item = snapshot.val() as ItemType;
+      result.push(item);
+    }
+  }
+  const promoRef = ref(db, 'pop');
+  set(promoRef, result);
+  return result as ItemType[];
+});
+
 export const extraReducers = (builder: ActionReducerMapBuilder<DevState>) => {
+  builder.addCase(addPromoItems.fulfilled, (state, action) => {
+    state.promoItems = action.payload;
+  });
+
+  builder.addCase(addPopItems.fulfilled, (state, action) => {
+    state.popItems = action.payload;
+  });
+
+  builder.addCase(fetchPopItems.fulfilled, (state, action) => {
+    state.popItems = action.payload;
+  });
+
+  builder.addCase(fetchPromoItems.fulfilled, (state, action) => {
+    state.promoItems = action.payload;
+  });
+
   builder.addCase(fetchItems.fulfilled, (state, action) => {
     state.items = action.payload;
   });

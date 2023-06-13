@@ -16,6 +16,12 @@ const ItemsSortByCategory = (
 
   if (items.length === 0) {
     items = itemsList.filter((item) => {
+      return item.categoryId === activeCategory;
+    });
+  }
+
+  if (items.length === 0) {
+    items = itemsList.filter((item) => {
       return item.subCategoryId === activeSubCategory;
     });
   }
@@ -35,7 +41,7 @@ const ItemsSortByCategory = (
   }
 
   if (search !== null && search !== '') {
-    items = itemsList.filter((item) => item.title.includes(search));
+    items = itemsList.filter((item) => item.title.toLowerCase().includes(search.toLowerCase()));
   }
 
   return items;

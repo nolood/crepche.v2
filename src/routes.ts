@@ -16,10 +16,6 @@ export const publicRoutes: RoutesType[] = [
     Component: AuthPage,
   },
   {
-    path: DEV_ROUTE,
-    Component: DevPage,
-  },
-  {
     path: CATALOG_ROUTE,
     Component: CatalogPage,
   },
@@ -29,5 +25,12 @@ export const authRoutes: RoutesType[] = [
   {
     path: CART_ROUTE,
     Component: CartPage,
+  },
+];
+
+export const protectRoutes: RoutesType[] = [
+  {
+    path: DEV_ROUTE,
+    Component: DevPage,
   },
 ];

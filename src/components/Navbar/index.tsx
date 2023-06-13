@@ -12,7 +12,7 @@ import NavbarItems from '../../utils/NavbarItems';
 import { useAppSelector } from '../../hooks/useReduxHooks';
 import { selectId } from '../../store/slices/userSlice/userSelectors';
 import { AUTH_ROUTE, HOME_ROUTE } from '../../utils/consts';
-import NavbarSkeleton from './NavbarSkeleton.tsx';
+import NavbarSkeleton from './NavbarSkeleton';
 
 const Navbar = () => {
   const navigate = useNavigate();

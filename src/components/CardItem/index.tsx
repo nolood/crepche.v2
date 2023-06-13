@@ -2,26 +2,37 @@ import {
   Card, CardActions, CardContent, CardMedia, Typography, Button, Tooltip,
 } from '@mui/material';
 import { FC, useEffect, useState } from 'react';
-import { ref, getDownloadURL, getStorage } from 'firebase/storage';
 import { CardItemProps } from '../../types/PropsTypes/CardItemProps';
-import CardImageSkeleton from './CardImageSkeleton.tsx';
+import CardImageSkeleton from './CardImageSkeleton';
+import { useAppDispatch, useAppSelector } from '../../hooks/useReduxHooks';
+import getImageUrl from '../../utils/getImageUrl';
+import { selectId } from '../../store/slices/userSlice/userSelectors';
+import { addToCart } from '../../store/slices/basketSlice/basketAsync';
 
 const CardItem: FC<CardItemProps> = ({
   id, title, pack, price, activeSubCategory,
 }) => {
   const [image, setImage] = useState<string | null>(null);
-  const storage = getStorage();
-  const getImageUrl = async () => {
-    const storageRef = ref(storage, `ItemsImages/${activeSubCategory}.webp`);
-    try {
-      const downloadURL = await getDownloadURL(storageRef);
-      setImage(downloadURL);
-    } catch (error) {
-      console.log(error, id);
+  const dispatch = useAppDispatch();
+  const userId = useAppSelector(selectId);
+  const handleAddToCart = () => {
+    if (id) {
+      dispatch(addToCart({
+        id,
+        title,
+        pack,
+        price,
+        count: 1,
+        image: String(image),
+        userId: String(userId),
+      }));
     }
   };
   useEffect(() => {
-    getImageUrl();
+    getImageUrl(activeSubCategory)
+      .then((result) => {
+        setImage(String(result));
+      });
   }, []);
   return (
     <Card
@@ -64,6 +75,7 @@ const CardItem: FC<CardItemProps> = ({
         <Button
           size="large"
           sx={{ width: '100%' }}
+          onClick={handleAddToCart}
         >
           Добавить в корзину
         </Button>

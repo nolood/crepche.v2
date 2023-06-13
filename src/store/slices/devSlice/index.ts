@@ -5,6 +5,8 @@ import { extraReducers } from './devAsync';
 const initialState: DevState = {
   categories: [],
   items: JSON.parse(String(localStorage.getItem('CREPCHE-ITEMS'))) || [],
+  promoItems: [],
+  popItems: [],
 };
 
 const devSlice = createSlice({
