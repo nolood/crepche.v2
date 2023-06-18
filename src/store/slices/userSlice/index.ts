@@ -10,6 +10,7 @@ const initialState: UserState = {
   activeCategory: null,
   activeSubCategory: null,
   search: null,
+  showCategories: false,
   message: {
     title: null,
     type: undefined,
@@ -24,6 +25,9 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    setShowCategories(state, action: PayloadAction<boolean>) {
+      state.showCategories = action.payload;
+    },
     setUserId(state, action: PayloadAction<string>) {
       state.id = action.payload;
     },
@@ -61,6 +65,7 @@ export const {
   setActiveCategory,
   setActiveSubCategory,
   setSearch,
+  setShowCategories,
 } = userSlice.actions;
 
 export default userSlice.reducer;

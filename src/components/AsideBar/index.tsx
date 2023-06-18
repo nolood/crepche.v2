@@ -8,9 +8,11 @@ import { fetchCategories } from '../../store/slices/devSlice/devAsync';
 import AsideBarSkeleton from './AsideBarSkeleton';
 import { setActiveCategory } from '../../store/slices/userSlice';
 import { CATALOG_ROUTE } from '../../utils/consts';
+import { selectShowCategories } from '../../store/slices/userSlice/userSelectors';
 
 const AsideBar = () => {
   const categories = useAppSelector(selectCategories);
+  const showCategories = useAppSelector(selectShowCategories);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const handleSetActiveCategory = (title: string, id: string) => {
@@ -24,6 +26,13 @@ const AsideBar = () => {
     <Box
       sx={{
         maxWidth: '300px',
+        height: 'max-content',
+        display: { xs: `${!showCategories ? 'none' : 'block'}`, md: 'block' },
+        position: { xs: 'absolute', md: 'static' },
+        right: 0,
+        top: '100px',
+        zIndex: 100,
+        backgroundColor: { xs: '#272727' },
       }}
     >
       {categories.length > 0
@@ -42,7 +51,7 @@ const AsideBar = () => {
                 <Button
                   onClick={() => handleSetActiveCategory(title, id)}
                   sx={{
-                    backgroundColor: 'rgba(255, 255, 255, .05)',
+                    backgroundColor: '#121212',
                     width: '100%',
                     justifyContent: 'flex-start',
                     textTransform: 'none',

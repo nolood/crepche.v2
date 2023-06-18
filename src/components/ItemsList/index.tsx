@@ -26,16 +26,21 @@ const ItemsList = () => {
   return (
     <Grid
       container
-      spacing={2}
       sx={{
         mt: 3,
-        pl: 5,
+        pl: { xs: 0, md: 5 },
+        ml: { xs: 0 },
+        gap: 2,
+        justifyContent: { xs: 'center', md: 'flex-start' },
       }}
     >
       {items.map(({
         id, title, price, pack, subCategoryId,
       }) => (
-        <Grid key={id} item>
+        <Grid
+          key={id}
+          item
+        >
           <CardItem
             id={id}
             title={title}

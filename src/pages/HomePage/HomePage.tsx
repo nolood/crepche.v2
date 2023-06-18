@@ -1,10 +1,12 @@
 import { Box, Stack } from '@mui/material';
-import { useEffect } from 'react';
-import { AsideBar } from '../../components';
-import GroupItems from '../../components/GroupItems';
+import React, { useEffect } from 'react';
 import { fetchPopItems, fetchPromoItems } from '../../store/slices/devSlice/devAsync';
 import { useAppDispatch, useAppSelector } from '../../hooks/useReduxHooks';
 import { selectPopItems, selectPromoItems } from '../../store/slices/devSlice/devSelectors';
+
+const MobileFloatingButton = React.lazy(() => import('../../components/MobileFloatingButton'));
+const AsideBar = React.lazy(() => import('../../components/AsideBar'));
+const GroupItems = React.lazy(() => import('../../components/GroupItems'));
 
 const HomePage = () => {
   const popItems = useAppSelector(selectPopItems);
@@ -19,10 +21,12 @@ const HomePage = () => {
       sx={{
         display: 'flex',
         flexDirection: 'row',
+        pb: 4,
       }}
     >
+      <MobileFloatingButton />
       <AsideBar />
-      <Stack sx={{ width: '100%', ml: 5 }}>
+      <Stack sx={{ width: '100%', ml: { xs: 0, md: 2 } }}>
         <GroupItems title="Товары по акции" items={promoItems} />
         <GroupItems title="Популярные товары" items={popItems} />
       </Stack>

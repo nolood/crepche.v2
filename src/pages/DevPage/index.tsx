@@ -1,13 +1,14 @@
 import { Stack } from '@mui/material';
-import { useEffect } from 'react';
-import Category from '../../components/DevPageComponents/Category';
-import SubCategory from '../../components/DevPageComponents/SubCategory';
-import CategoriesOverview from '../../components/DevPageComponents/CategoriesOverview';
+import React, { useEffect } from 'react';
 import { fetchCategories, fetchPopItems, fetchPromoItems } from '../../store/slices/devSlice/devAsync';
 import { useAppDispatch, useAppSelector } from '../../hooks/useReduxHooks';
-import ChangeItems from '../../components/DevPageComponents/ChangeItems';
-import GroupItems from '../../components/GroupItems';
 import { selectPopItems, selectPromoItems } from '../../store/slices/devSlice/devSelectors';
+
+const ChangeItems = React.lazy(() => import('../../components/DevPageComponents/ChangeItems'));
+const GroupItems = React.lazy(() => import('../../components/GroupItems'));
+const Category = React.lazy(() => import('../../components/DevPageComponents/Category'));
+const SubCategory = React.lazy(() => import('../../components/DevPageComponents/SubCategory'));
+const CategoriesOverview = React.lazy(() => import('../../components/DevPageComponents/CategoriesOverview'));
 
 const DevPage = () => {
   const dispatch = useAppDispatch();

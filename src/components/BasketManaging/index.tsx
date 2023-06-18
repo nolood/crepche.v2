@@ -16,7 +16,11 @@ const BasketManaging = () => {
     dispatch(deleteBasket(String(userId)));
   };
   return (
-    <Stack direction="row" spacing={2} sx={{ alignItems: 'center', mb: 2 }}>
+    <Stack
+      sx={{
+        alignItems: 'center', mb: 2, flexDirection: { xs: 'column', md: 'row' }, gap: 2,
+      }}
+    >
       <Typography
         sx={{ mr: 2 }}
       >

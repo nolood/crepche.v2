@@ -1,6 +1,7 @@
 import { Box } from '@mui/material';
+import './loader.scss';
 
-const NotfoundPage = () => {
+const Loader = () => {
   return (
     <Box
       sx={{
@@ -11,9 +12,14 @@ const NotfoundPage = () => {
         alignItems: 'center',
       }}
     >
-      Страница не найдена!
+      <div className="lds-ring">
+        <div />
+        <div />
+        <div />
+        <div />
+      </div>
     </Box>
   );
 };
 
-export default NotfoundPage;
+export default Loader;

@@ -7,11 +7,15 @@ import CardSkeleton from '../CardItem/CardSkeleton';
 const GroupItems: FC<GroupItemsProps> = ({ title, items }) => {
   return (
     <>
-      <Typography>
+      <Typography variant="h4" sx={{ mb: 3, textAlign: { xs: 'center' } }}>
         {title}
       </Typography>
       <Stack sx={{
-        flexDirection: 'row', gap: 5, flexWrap: 'wrap', mb: 5,
+        flexDirection: 'row',
+        gap: { xs: 2, md: 5 },
+        flexWrap: 'wrap',
+        mb: 5,
+        justifyContent: 'center',
       }}
       >
         {items.length > 0 ? items.map((item) => (

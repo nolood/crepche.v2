@@ -1,14 +1,15 @@
 import {
   Box, Button, FormControl, Input, InputLabel, MenuItem, Select, SelectChangeEvent, Stack,
 } from '@mui/material';
-import { DataGrid, GridRowSelectionModel, GridValueGetterParams } from '@mui/x-data-grid';
+import { GridRowSelectionModel } from '@mui/x-data-grid';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/useReduxHooks';
 import {
   addFiles, addPopItems, addPromoItems, changeItemsCategory, fetchItems,
 } from '../../store/slices/devSlice/devAsync';
-import { selectCategories, selectItems } from '../../store/slices/devSlice/devSelectors';
+import { selectCategories } from '../../store/slices/devSlice/devSelectors';
 import { ItemType } from '../../types/ItemType';
+import DevTable from './DevTable';
 
 const ChangeItems = () => {
   const [itemsData, setItemsData] = useState<ItemType[]>([]);
@@ -16,7 +17,6 @@ const ChangeItems = () => {
   const [selection, setSelection] = useState<GridRowSelectionModel>([]);
   const categories = useAppSelector(selectCategories);
   const subCategories = categories.flatMap((item) => item.subcategories);
-  const rows = useAppSelector(selectItems);
   const dispatch = useAppDispatch();
 
   const handleSelectionModelChange = (newSelectionModel: GridRowSelectionModel) => {
@@ -54,36 +54,6 @@ const ChangeItems = () => {
     dispatch(addPopItems(selection));
   };
 
-  const DevTableColumns = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'title', headerName: 'Title', width: 530 },
-    { field: 'pack', headerName: 'Pack', width: 130 },
-    {
-      field: 'price',
-      headerName: 'Price',
-      type: 'number',
-      width: 90,
-    },
-    {
-      field: 'category',
-      headerName: 'Category',
-      width: 150,
-      valueGetter: (params: GridValueGetterParams) => (
-        categories.filter((item) => (item.id === params.row.categoryId))[0]?.title
-      ),
-    },
-    {
-      field: 'subCategory',
-      headerName: 'SubCategory',
-      width: 150,
-      valueGetter: (params: GridValueGetterParams) => (
-        categories.find((item) => item.id === params.row.categoryId)
-          ?.subcategories?.find((subItem) => subItem.id === params.row.subCategoryId)?.title),
-    },
-    { field: 'categoryId', headerName: 'Category Id', width: 100 },
-    { field: 'subCategoryId', headerName: 'SubCategory Id', width: 100 },
-  ];
-
   return (
     <Box>
       <Stack direction="row" spacing={2} sx={{ mb: 4 }}>
@@ -101,6 +71,7 @@ const ChangeItems = () => {
             type="submit"
             variant="outlined"
             sx={{ height: '100%', mr: 2 }}
+            size="small"
           >
             Добавить в подкатегорию
           </Button>
@@ -134,36 +105,31 @@ const ChangeItems = () => {
             sx={{ height: '100%' }}
             onClick={handleAddFiles}
             disabled={itemsData.length === 0}
+            size="small"
           >
-            Добавить выбранные товары
+            Добавить товары
           </Button>
           <Button
             variant="outlined"
             sx={{ height: '100%', mr: 2, ml: 2 }}
             onClick={handleAddPromoItems}
+            size="small"
           >
-            Добавить в товары по акции
+            Добавить в prom
           </Button>
           <Button
             variant="outlined"
             sx={{ height: '100%' }}
             onClick={handleAddPopItems}
+            size="small"
           >
-            Добавить в популярные товары
+            Добавить в pop
           </Button>
         </Box>
       </Stack>
-      <DataGrid
-        columns={DevTableColumns}
-        rows={rows}
-        initialState={{
-          pagination: {
-            paginationModel: { page: 0, pageSize: 10 },
-          },
-        }}
-        pageSizeOptions={[10, 10]}
-        checkboxSelection
-        onRowSelectionModelChange={handleSelectionModelChange}
+      <DevTable
+        selection={handleSelectionModelChange}
+        categories={categories}
       />
     </Box>
   );

@@ -14,7 +14,7 @@ const CartPage = () => {
     }
   });
   return (
-    <Box>
+    <Box sx={{ pb: 4 }}>
       <BasketManaging />
       <BasketList />
     </Box>

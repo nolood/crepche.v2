@@ -38,20 +38,20 @@ const BasketCard: FC<BasketCardProps> = ({ item, basketItems }) => {
     <Card
       sx={{
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: { xs: 'column', md: 'row' },
         justifyContent: 'space-between',
       }}
     >
       <Box sx={{
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: { xs: 'column', md: 'row' },
       }}
       >
         <CardMedia
           component="img"
           sx={{
             height: '140px',
-            width: '100px',
+            width: { xs: '100%', md: '100px' },
           }}
           image={item.image}
         />

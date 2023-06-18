@@ -37,7 +37,7 @@ const CardItem: FC<CardItemProps> = ({
   return (
     <Card
       sx={{
-        width: '350px',
+        width: { xs: '250px', md: '350px' },
       }}
     >
       {image
@@ -57,6 +57,9 @@ const CardItem: FC<CardItemProps> = ({
             variant="h5"
             component="div"
             noWrap
+            sx={{
+              fontSize: { xs: '11px', md: '1rem' },
+            }}
           >
             {title}
           </Typography>
@@ -72,13 +75,15 @@ const CardItem: FC<CardItemProps> = ({
         </Typography>
       </CardContent>
       <CardActions>
-        <Button
-          size="large"
-          sx={{ width: '100%' }}
-          onClick={handleAddToCart}
-        >
-          Добавить в корзину
-        </Button>
+        <Tooltip title={!userId && 'Чтобы пользоваться корзиной необходимо войти'}>
+          <Button
+            size="large"
+            sx={{ width: '100%' }}
+            onClick={handleAddToCart}
+          >
+            Добавить в корзину
+          </Button>
+        </Tooltip>
       </CardActions>
     </Card>
   );
