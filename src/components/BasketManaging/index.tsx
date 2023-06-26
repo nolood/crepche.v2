@@ -1,12 +1,17 @@
 import {
   Button, Stack, Typography,
 } from '@mui/material';
+import { FC } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/useReduxHooks';
 import { selectBasketItems } from '../../store/slices/basketSlice/basketSelectors';
 import { deleteBasket } from '../../store/slices/basketSlice/basketAsync';
 import { selectId } from '../../store/slices/userSlice/userSelectors';
 
-const BasketManaging = () => {
+interface BasketManagingProps {
+  handleOpen: () => void;
+}
+
+const BasketManaging: FC<BasketManagingProps> = ({ handleOpen }) => {
   const basketItems = useAppSelector(selectBasketItems);
   const userId = useAppSelector(selectId);
   const totalPrice = basketItems.reduce((total, item) => total + (item.price * item.count), 0);
@@ -43,6 +48,7 @@ const BasketManaging = () => {
       <Button
         variant="outlined"
         disabled={basketItems.length === 0}
+        onClick={handleOpen}
       >
         Оформить заказ
       </Button>

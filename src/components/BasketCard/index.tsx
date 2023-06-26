@@ -62,7 +62,7 @@ const BasketCard: FC<BasketCardProps> = ({ item, basketItems }) => {
           <Typography variant="body2" color="text.secondary">
             Цена:
             {' '}
-            {item.price * count}
+            {(item.price * count).toFixed(2)}
             <br />
             Тип упаковки:
             {' '}

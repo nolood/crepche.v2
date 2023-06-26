@@ -9,9 +9,13 @@ interface NavbarMenuProps {
     navigate: NavigateFunction;
     userId: string | null;
     handleSignOut: () => void;
+    handleOpen: () => void;
+    handleOpenSec: () => void;
 }
 
-const NavbarMenu: FC<NavbarMenuProps> = ({ navigate, userId, handleSignOut }) => {
+const NavbarMenu: FC<NavbarMenuProps> = ({
+  navigate, userId, handleSignOut, handleOpen, handleOpenSec,
+}) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: SyntheticEvent<HTMLButtonElement>) => {
@@ -55,6 +59,28 @@ const NavbarMenu: FC<NavbarMenuProps> = ({ navigate, userId, handleSignOut }) =>
             {title}
           </MenuItem>
         ))}
+        <MenuItem
+          sx={{
+            color: 'white',
+            display: 'block',
+            fontWeight: 500,
+            fontSize: '1.1rem',
+          }}
+          onClick={handleOpen}
+        >
+          Доставка
+        </MenuItem>
+        <MenuItem
+          sx={{
+            color: 'white',
+            display: 'block',
+            fontWeight: 500,
+            fontSize: '1.1rem',
+          }}
+          onClick={handleOpenSec}
+        >
+          Связь с нами
+        </MenuItem>
         <MenuItem
           onClick={() => navigate(CART_ROUTE)}
           sx={{

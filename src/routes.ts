@@ -1,9 +1,9 @@
 import {
-  AUTH_ROUTE, CART_ROUTE, CATALOG_ROUTE, DEV_ROUTE, HOME_ROUTE,
+  AUTH_ROUTE, CART_ROUTE, CATALOG_ROUTE, DEV_ROUTE, HOME_ROUTE, OFFER_ROUTE,
 } from './utils/consts';
 import { RoutesType } from './types/RoutesType';
 import {
-  AuthPage, CartPage, CatalogPage, DevPage, HomePage,
+  AuthPage, CartPage, CatalogPage, DevPage, HomePage, OfferPage,
 } from './pages';
 
 export const publicRoutes: RoutesType[] = [
@@ -32,5 +32,9 @@ export const protectRoutes: RoutesType[] = [
   {
     path: DEV_ROUTE,
     Component: DevPage,
+  },
+  {
+    path: OFFER_ROUTE,
+    Component: OfferPage,
   },
 ];

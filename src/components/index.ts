@@ -11,6 +11,7 @@ import ItemsList from './ItemsList';
 import BasketList from './BasketList';
 import BasketCard from './BasketCard';
 import BasketManaging from './BasketManaging';
+import OfferPlacement from './OfferPlacement';
 
 export {
   Navbar,
@@ -26,4 +27,5 @@ export {
   BasketList,
   BasketCard,
   BasketManaging,
+  OfferPlacement,
 };

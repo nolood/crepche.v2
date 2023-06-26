@@ -1,7 +1,7 @@
 import { ActionReducerMapBuilder, createAsyncThunk } from '@reduxjs/toolkit';
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import {
-  getDatabase,
+  getDatabase, push,
   ref,
   serverTimestamp,
   set,
@@ -21,6 +21,12 @@ export const regUser = createAsyncThunk('user/regUserStatus', async ({ email, pa
     email,
     password,
   };
+});
+
+export const sendOffer = createAsyncThunk('user/sendOfferStatus', async (params: any) => {
+  const db = getDatabase();
+  const offerRef = ref(db, 'offers');
+  push(offerRef, params);
 });
 
 export const extraReducers = (builder: ActionReducerMapBuilder<UserState>) => {
@@ -53,5 +59,10 @@ export const extraReducers = (builder: ActionReducerMapBuilder<UserState>) => {
   builder.addCase(regUser.rejected, (state, action) => {
     state.message.title = action.error.code;
     state.message.type = 'error';
+  });
+
+  builder.addCase(sendOffer.fulfilled, (state) => {
+    state.message.title = 'Заказ успешно оформлен!';
+    state.message.type = 'success';
   });
 };

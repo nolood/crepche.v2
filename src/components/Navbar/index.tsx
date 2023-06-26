@@ -1,7 +1,7 @@
 import {
   AppBar,
   Box,
-  Button,
+  Button, Modal,
   Toolbar,
   Tooltip,
   Typography,
@@ -9,7 +9,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { getAuth, signOut } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import React from 'react';
+import React, { useState } from 'react';
 import NavbarItems from '../../utils/NavbarItems';
 import { useAppSelector } from '../../hooks/useReduxHooks';
 import { selectId } from '../../store/slices/userSlice/userSelectors';
@@ -19,6 +19,12 @@ import NavbarSkeleton from './NavbarSkeleton';
 const NavbarMenu = React.lazy(() => import('../NavbarMenu'));
 
 const Navbar = () => {
+  const [open, setOpen] = useState<boolean>(false);
+  const [openSec, setOpenSec] = useState<boolean>(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const handleOpenSec = () => setOpenSec(true);
+  const handleCloseSec = () => setOpenSec(false);
   const navigate = useNavigate();
   const userId = useAppSelector(selectId);
   const auth = getAuth();
@@ -35,6 +41,90 @@ const Navbar = () => {
 
   return (
     <AppBar position="fixed">
+      <Modal
+        open={openSec}
+        onClose={handleCloseSec}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box
+          component="div"
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: { xs: '300px', md: '700px' },
+            bgcolor: 'background.paper',
+            boxShadow: 24,
+            p: { xs: 4, md: 10 },
+          }}
+        >
+          <Typography
+            variant="h4"
+            component="h4"
+            align="center"
+            sx={{
+              mb: 2,
+            }}
+          >
+            Связаться с нами
+          </Typography>
+          <Typography
+            align="center"
+          >
+            Телефон 1: +79222387191
+            {' '}
+            <br />
+            Телефон 2: +79320180949
+            {' '}
+            <br />
+            Электронная почта: krep-che@mail.ru
+          </Typography>
+        </Box>
+      </Modal>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box
+          component="div"
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: { xs: '300px', md: '700px' },
+            bgcolor: 'background.paper',
+            boxShadow: 24,
+            p: { xs: 4, md: 10 },
+          }}
+        >
+          <Typography
+            variant="h4"
+            component="h4"
+            align="center"
+            sx={{
+              mb: 2,
+            }}
+          >
+            Доставка
+          </Typography>
+          <Typography
+            align="center"
+          >
+            Доставка заказов по Челябинску бесплатная, доставляем на следующий день.
+            Доставка по области - цена и сроки договорные.
+            В другие регионы отправляем удобной вам транспортной компанией.
+            Вы можете получить консультацию или оформить заказ по номеру телефона,
+            нажав на кнопку "связаться с нами", выбрав удобный способ. Либо оформите заказ на сайте,
+            отправьте заявку и в ближайшее время с вами свяжутся, чтоб подтвердить заказ и
+            обговорить детали.
+          </Typography>
+        </Box>
+      </Modal>
       <Toolbar
         sx={{ display: { xs: 'flex' }, justifyContent: 'space-between' }}
       >
@@ -50,7 +140,7 @@ const Navbar = () => {
             cursor: 'pointer',
           }}
         >
-          crep-che
+          креп-че
         </Typography>
         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
           {NavbarItems.map(({ title, id, route }) => (
@@ -67,6 +157,28 @@ const Navbar = () => {
               {title}
             </Button>
           ))}
+          <Button
+            sx={{
+              color: 'white',
+              display: 'block',
+              fontWeight: 500,
+              fontSize: '1.1rem',
+            }}
+            onClick={handleOpen}
+          >
+            Доставка
+          </Button>
+          <Button
+            sx={{
+              color: 'white',
+              display: 'block',
+              fontWeight: 500,
+              fontSize: '1.1rem',
+            }}
+            onClick={handleOpenSec}
+          >
+            Связь с нами
+          </Button>
           <Tooltip
             title={!userId && 'Чтобы пользоваться корзиной необходимо войти'}
           >
@@ -98,7 +210,13 @@ const Navbar = () => {
             Выйти
           </Button>
         )}
-        <NavbarMenu navigate={navigate} userId={userId} handleSignOut={handleSignOut} />
+        <NavbarMenu
+          navigate={navigate}
+          userId={userId}
+          handleSignOut={handleSignOut}
+          handleOpen={handleOpen}
+          handleOpenSec={handleOpenSec}
+        />
       </Toolbar>
     </AppBar>
   );

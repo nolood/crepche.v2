@@ -6,4 +6,5 @@ export type DevState = {
   items: ItemType[],
   promoItems: ItemType[],
   popItems: ItemType[],
+  offers: any,
 }

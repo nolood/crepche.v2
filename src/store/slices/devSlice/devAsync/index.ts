@@ -199,7 +199,18 @@ export const addPopItems = createAsyncThunk('dev/addPopItemsStatus', async (para
   return result as ItemType[];
 });
 
+export const fetchOffers = createAsyncThunk('dev/fetchOffers', async () => {
+  const db = getDatabase();
+  const offersRef = ref(db, 'offers');
+  return get(offersRef)
+    .then((snapshot) => Object.values(snapshot.val()));
+});
+
 export const extraReducers = (builder: ActionReducerMapBuilder<DevState>) => {
+  builder.addCase(fetchOffers.fulfilled, (state, action) => {
+    state.offers = action.payload;
+  });
+
   builder.addCase(addPromoItems.fulfilled, (state, action) => {
     state.promoItems = action.payload;
   });

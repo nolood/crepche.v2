@@ -7,6 +7,7 @@ const initialState: DevState = {
   items: JSON.parse(String(localStorage.getItem('CREPCHE-ITEMS'))) || [],
   promoItems: [],
   popItems: [],
+  offers: [],
 };
 
 const devSlice = createSlice({
