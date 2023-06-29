@@ -1,0 +1,1 @@
+import{a as e,l,aW as u,aX as n,j as p,ao as h}from"./index-e4339af6.js";const d=()=>{const[t,s]=e.useState(""),r=l(),c=e.useCallback(u(a=>{r(n(a.target.value))},500),[]),o=a=>{c(a),s(a.target.value)};return p.jsx(h,{placeholder:"Поиск товаров...",value:t,onChange:o,sx:{flexGrow:1,ml:5,mr:5}})};export{d as default};
